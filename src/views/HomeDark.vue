@@ -1,7 +1,7 @@
 <template>
   <main class="yellow">
     <div className="demo-sticker" title="Swich Light">
-      <a href="/home-light">
+      <a href="/light">
         <i aria-hidden="true" className="fa fa-lightbulb-o"></i>
       </a>
     </div>
@@ -29,7 +29,7 @@
         </li>
         <!-- End icon-box -->
 
-        <li class="icon-box" role="presentation">
+        <li class="icon-box" hidden="hidden" role="presentation">
           <button data-bs-target="#portfolio" data-bs-toggle="tab">
             <i class="fa fa-briefcase"></i>
             <h2>Portfolio</h2>
@@ -37,7 +37,7 @@
         </li>
         <!-- End icon-box -->
 
-        <li class="icon-box" role="presentation">
+        <li class="icon-box" hidden="hidden" role="presentation">
           <button data-bs-target="#contact" data-bs-toggle="tab">
             <i class="fa fa-envelope-open"></i>
             <h2>Contact</h2>
@@ -45,7 +45,7 @@
         </li>
         <!-- End icon-box -->
 
-        <li class="icon-box" role="presentation">
+        <li class="icon-box" hidden="hidden" role="presentation">
           <button data-bs-target="#blog" data-bs-toggle="tab">
             <i class="fa fa-comments"></i>
             <h2>Blog</h2>

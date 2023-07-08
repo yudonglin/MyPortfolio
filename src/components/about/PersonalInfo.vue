@@ -16,16 +16,12 @@ export default {
   data() {
     return {
       personalInfoContent: [
-        {id: 1, meta: "first name", metaInfo: "Steve"},
-        {id: 2, meta: "last name", metaInfo: "Milner"},
-        {id: 3, meta: "Age", metaInfo: "27 Years"},
-        {id: 4, meta: "Nationality", metaInfo: "Tunisian"},
-        {id: 5, meta: "Freelance", metaInfo: "Available"},
-        {id: 6, meta: "Address", metaInfo: "Tunis"},
-        {id: 7, meta: "phone", metaInfo: "+21621184010"},
-        {id: 8, meta: "Email", metaInfo: "you@mail.com"},
-        {id: 9, meta: "Skype", metaInfo: " steve.milner"},
-        {id: 10, meta: "langages", metaInfo: "French, English"},
+        {id: 1, meta: "first name", metaInfo: "Yudong"},
+        {id: 2, meta: "last name", metaInfo: "Lin"},
+        {id: 3, meta: "Age", metaInfo: "23 Years"},
+        {id: 4, meta: "Email", metaInfo: "yudonglin@gmail.com"},
+        {id: 5, meta: "Discord", metaInfo: "anyleftovers"},
+        {id: 6, meta: "languages", metaInfo: "English, Chinese"},
       ],
     };
   },

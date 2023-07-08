@@ -23,27 +23,29 @@ export default {
       experienceContent: [
         {
           id: 1,
-          year: "   2018 - Present",
-          position: " Web Developer",
-          compnayName: "Envato",
-          details: `  Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore
-        adipisicing elit`,
+          year: "02/2023 – present",
+          position: "Pushback to the Future",
+          compnayName: "Lightgbm/Pandas",
+          details: `Implementing a set of tools and models for the "Pushback to the Future" competition,
+          and discovered multiple critical features that helped the team achieve fourth place
+          among 49 competitors at the conclusion of phase 1.`,
         },
         {
           id: 2,
-          year: "2013 - 2018",
-          position: " UI/UX Designer",
-          compnayName: "Themeforest",
-          details: `Lorem incididunt dolor sit amet, consectetur eiusmod dunt doldunt dol
-        elit, tempor incididunt`,
+          year: "2020 – present",
+          position: "Linpg",
+          compnayName: "Python",
+          details: `A 2D game engine based on Pygame, with the goal of making game development using
+          Python much easier for developers from all levels.`,
         },
         {
           id: 3,
-          year: "2005 - 2013",
-          position: "Consultant",
-          compnayName: "Videohive",
-          details: `Lorem ipsum dolor sit amet, tempor incididunt ut laboreconsectetur
-        elit, sed do eiusmod tempor duntt`,
+          year: "2023",
+          position: "YourProfile",
+          compnayName: "Tensorflow",
+          details: `A collaborative course project focused on the development of a user profiling system
+          powered by machine-learning. The accuracy of my neural network model in predicting
+          gender was 80%, which is the highest accuracy achieved in the category of visual prediction.`,
         },
       ],
     };

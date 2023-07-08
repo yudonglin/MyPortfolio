@@ -14,7 +14,7 @@
             class="img-fluid main-img-mobile d-sm-block d-lg-none"
         />
         <h1 class="text-uppercase poppins-font">
-          I'm {{ heroContent.heroTitleName }}.
+          Hi there, my name is {{ heroContent.heroTitleName }}.
           <span>{{ heroContent.heroDesignation }}</span>
         </h1>
         <p class="open-sans-font">{{ heroContent.heroDescriptions }}</p>
@@ -71,12 +71,11 @@ export default {
       heroContent: {
         heroImage: require(`@/assets/images/hero/dark.jpg`),
         heroMobileImage: require(`@/assets/images/hero/img-mobile.jpg`),
-        heroTitleName: "steve milner",
-        heroDesignation: "web designer",
-        heroDescriptions: `I'm a Tunisian based web designer & front‑end developer focused on
-        crafting clean & user‑friendly experiences, I am passionate about
-        building excellent software that improves the lives of those
-        around me.`,
+        heroTitleName: "Yudong Lin",
+        heroDesignation: "software engineer",
+        heroDescriptions: `
+        I am a recent graduate seeking an entry-level role in a technology company to further grow my knowledge and experience.
+        In my spare time, I am also an indie game designer, focusing on several different scale game projects.`,
         heroBtn: "more about me",
       },
     };

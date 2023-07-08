@@ -1,37 +1,36 @@
 import {createRouter, createWebHistory} from "vue-router";
-import Preview from "../views/MainPreview.vue";
 import NotFound from "../views/PageNotFound.vue";
 
 const routes = [
-    {
+    /*{
         path: "/",
         name: "Preview",
         component: Preview,
         meta: {
             title: "Preview || Tunis VueJS 3 Personal Portfolio Template",
         },
-    },
+    },*/
     {
-        path: "/home-dark",
+        path: "/",
         name: "HomeDark",
         component: () => import("../views/HomeDark.vue"),
         meta: {
-            title: "Home Dark || Tunis VueJS 3 Personal Portfolio Template",
+            title: "Home Dark",
         },
     },
     {
-        path: "/home-light",
+        path: "/light",
         name: "HomeLight",
         component: () => import("../views/HomeLight.vue"),
         meta: {
-            title: "Home Light || Tunis VueJS 3 Personal Portfolio Template",
+            title: "Home Light",
         },
     },
     {
         path: "/:catchAll(.*)",
         component: NotFound,
         meta: {
-            title: "Not Found || Tunis VueJS 3 Personal Portfolio Template",
+            title: "Not Found",
         },
     },
 ];

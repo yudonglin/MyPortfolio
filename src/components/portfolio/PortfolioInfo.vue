@@ -59,9 +59,9 @@
 
                           <div class="col-12 col-sm-6 mb-2">
                             <i class="fa fa-user-o pr-2"></i>
-                            <span class="project-label">Client </span>:
+                            <span class="project-label">Contributor(s) </span>:
                             <span class="ft-wt-600 uppercase">{{
-                                portfolio.client
+                                portfolio.contributors
                               }}</span>
                           </div>
                           <!-- {/* End .col */} -->

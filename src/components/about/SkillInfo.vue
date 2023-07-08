@@ -22,24 +22,14 @@ export default {
   data() {
     return {
       skillsContent: [
-        {id: 1, skillClass: "p25", skillPercent: "25", skillName: "HTML"},
-        {
-          id: 2,
-          skillClass: "p89",
-          skillPercent: "89",
-          skillName: "JAVASCRIPT",
-        },
-        {id: 3, skillClass: "p70", skillPercent: "70", skillName: "CSS"},
-        {id: 4, skillClass: "p66", skillPercent: "66", skillName: "PHP"},
-        {
-          id: 5,
-          skillClass: "p95",
-          skillPercent: "95",
-          skillName: "WORDPRESS",
-        },
-        {id: 6, skillClass: "p50", skillPercent: "50", skillName: "JQUERY"},
-        {id: 7, skillClass: "p65", skillPercent: "65", skillName: "ANGULAR"},
-        {id: 8, skillClass: "p45", skillPercent: "45", skillName: "REACT"},
+        {id: 1, skillClass: "p98", skillPercent: "98", skillName: "Python"},
+        {id: 2, skillClass: "p90", skillPercent: "90", skillName: "Java"},
+        {id: 3, skillClass: "p80", skillPercent: "83", skillName: "C#"},
+        {id: 4, skillClass: "p78", skillPercent: "78", skillName: "TypeScript"},
+        {id: 5, skillClass: "p76", skillPercent: "73", skillName: "Bootstrap"},
+        {id: 6, skillClass: "p83", skillPercent: "80", skillName: "Angular"},
+        {id: 7, skillClass: "p78", skillPercent: "74", skillName: "Django"},
+        {id: 8, skillClass: "p84", skillPercent: "76", skillName: ".NET Core"},
       ],
     };
   },

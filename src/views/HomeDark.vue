@@ -37,7 +37,7 @@
         </li>
         <!-- End icon-box -->
 
-        <li class="icon-box" hidden="hidden" role="presentation">
+        <li class="icon-box" role="presentation">
           <button data-bs-target="#contact" data-bs-toggle="tab">
             <i class="fa fa-envelope-open"></i>
             <h2>Contact</h2>
@@ -102,12 +102,11 @@
             <!-- {/* Left Side Starts */} -->
             <div class="col-12 col-lg-4">
               <h3 class="text-uppercase custom-title mb-0 ft-wt-600 pb-3">
-                Don't be shy !
+                Want to talk?!
               </h3>
               <p class="open-sans-font mb-4">
-                Feel free to get in touch with me. I am always open to
-                discussing new projects, creative ideas or opportunities to be
-                part of your visions.
+                Please don't hesitate to follow me on LinkedIn or Github, or send me a friend request on Discord.
+                I am always looking for opportunities to connect and work with talented developers.
               </p>
               <AddressInfo/>
               <!-- {/* End Address */} -->

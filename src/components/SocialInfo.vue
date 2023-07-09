@@ -12,7 +12,8 @@
 export default {
   data() {
     return {
-      SocialShare: [
+      SocialShare: []
+      /*[
         {
           id: 1,
           iconName: "fa fa-facebook",
@@ -25,7 +26,7 @@ export default {
           link: "https://www.youtube.com/",
         },
         {id: 4, iconName: "fa fa-dribbble", link: "https://dribbble.com/"},
-      ],
+      ],*/
     };
   },
 };

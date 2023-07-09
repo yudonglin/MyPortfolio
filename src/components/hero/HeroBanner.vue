@@ -14,8 +14,8 @@
             class="img-fluid main-img-mobile d-sm-block d-lg-none"
         />
         <h1 class="text-uppercase poppins-font">
-          Hi there, my name is {{ heroContent.heroTitleName }}.
-          <span>{{ heroContent.heroDesignation }}</span>
+          Hi there, I am
+          <span>{{ heroContent.heroTitleName }},</span>
         </h1>
         <p class="open-sans-font">{{ heroContent.heroDescriptions }}</p>
         <button
@@ -74,7 +74,7 @@ export default {
         heroTitleName: "Yudong Lin",
         heroDesignation: "software engineer",
         heroDescriptions: `
-        I am a recent graduate seeking an entry-level role in a technology company to further grow my knowledge and experience.
+        a recent graduate seeking an entry-level role in a technology company to further grow my knowledge and experience.
         In my spare time, I am also an indie game designer, focusing on several different scale game projects.`,
         heroBtn: "more about me",
       },

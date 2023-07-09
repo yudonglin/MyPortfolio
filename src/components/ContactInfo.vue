@@ -1,5 +1,5 @@
 <template>
-  <form ref="form" class="contactform" @submit.prevent="sendEmail">
+  <form ref="form" class="contactform" @submit.prevent="sendDisabled">
     <div class="row">
       <div class="col-12 col-md-6">
         <div class="form-group">
@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 
 export default {
   data() {
@@ -76,7 +76,10 @@ export default {
     };
   },
   methods: {
-    sendEmail() {
+    sendDisabled(){
+      alert("This feature has been disabled due to DDOS, please contact me through email. Sorry for the inconvenience.");
+    },
+    /*sendEmail() {
       emailjs
           .sendForm(
               "service_n4mkhz9",
@@ -104,7 +107,7 @@ export default {
       this.email = "";
       this.subject = "";
       this.message = "";
-    },
+    },*/
   },
 };
 </script>

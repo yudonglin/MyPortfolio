@@ -25,7 +25,7 @@ export default {
           id: 1,
           year: "02/2023 – present",
           position: "Pushback to the Future",
-          compnayName: "Lightgbm/Pandas",
+          compnayName: "Lightgbm / Pandas",
           details: `Implementing a set of tools and models for the "Pushback to the Future" competition,
           and discovered multiple critical features that helped the team achieve fourth place
           among 49 competitors at the conclusion of phase 1.`,
@@ -41,7 +41,7 @@ export default {
         {
           id: 3,
           year: "2023",
-          position: "YourProfile",
+          position: "Your Profile",
           compnayName: "Tensorflow",
           details: `A collaborative course project focused on the development of a user profiling system
           powered by machine-learning. The accuracy of my neural network model in predicting

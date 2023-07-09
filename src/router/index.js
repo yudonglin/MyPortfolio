@@ -15,7 +15,7 @@ const routes = [
         name: "HomeDark",
         component: () => import("../views/HomeDark.vue"),
         meta: {
-            title: "Yudong Lin's portfolio",
+            title: "Yudong Lin",
         },
     },
     {
@@ -23,7 +23,7 @@ const routes = [
         name: "HomeLight",
         component: () => import("../views/HomeLight.vue"),
         meta: {
-            title: "Yudong Lin's portfolio",
+            title: "Yudong Lin",
         },
     },
     {

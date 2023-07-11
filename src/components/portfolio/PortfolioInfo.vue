@@ -5,12 +5,12 @@
       <div class="portfolio-tab-content">
         <ul class="row grid justify-content-center">
           <li v-for="item in portfolios" :key="item.id">
-            <figure
-                data-bs-target="#portfolioModal"
-                data-bs-toggle="modal"
-                @click="handleBlogItem(item.id)"
+            <figure data-bs-target="#portfolioModal"
+                    data-bs-toggle="modal"
+                    style="height: 100%"
+                    @click="handleBlogItem(item.id)"
             >
-              <img :src="item.img" alt="Portolio"/>
+              <img :src="item.img" alt="Portolio" style="height: 100%; object-fit: cover;"/>
               <div class="hover-content-wrapper">
                 <span class="content-title">{{ item.title }}</span>
               </div>
@@ -50,9 +50,9 @@
                         <div class="row open-sans-font">
                           <div class="col-12 col-sm-6 mb-2">
                             <i class="fa fa-file-text-o pr-2"></i>
-                            <span class="project-label">Project </span>:
+                            <span class="project-label">Framework(s) </span>:
                             <span class="ft-wt-600 uppercase">
-                              {{ portfolio.project }}</span
+                              {{ portfolio.framework }}</span
                             >
                           </div>
                           <!-- {/* End .col */} -->
@@ -68,7 +68,7 @@
 
                           <div class="col-12 col-sm-6 mb-2">
                             <i class="fa fa-code pr-2"></i>
-                            <span class="project-label">Langages </span>:
+                            <span class="project-label">Languages </span>:
                             <span class="ft-wt-600 uppercase">{{
                                 portfolio.language
                               }}</span>

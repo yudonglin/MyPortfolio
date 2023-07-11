@@ -29,7 +29,7 @@
         </li>
         <!-- End icon-box -->
 
-        <li class="icon-box" hidden="hidden" role="presentation">
+        <li class="icon-box" role="presentation">
           <button data-bs-target="#portfolio" data-bs-toggle="tab">
             <i class="fa fa-briefcase"></i>
             <h2>Portfolio</h2>

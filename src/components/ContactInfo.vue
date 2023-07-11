@@ -76,7 +76,7 @@ export default {
     };
   },
   methods: {
-    sendDisabled(){
+    sendDisabled() {
       alert("This feature has been disabled due to DDOS, please contact me through email. Sorry for the inconvenience.");
     },
     /*sendEmail() {

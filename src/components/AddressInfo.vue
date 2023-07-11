@@ -4,13 +4,13 @@
     <span class="d-block">Address Point</span>
     123 Test Street, WA, United States Of America, 12345.
   </p>
-  
+
   <p class="open-sans-font custom-span-contact position-relative">
     <i class="bi bi-discord position-absolute"></i>
     <span class="d-block">Discord</span>
     <a href="https://discordapp.com/users/anyleftovers">anyleftovers</a>
   </p>
-  
+
   <p class="open-sans-font custom-span-contact position-relative">
     <i class="bi bi-linkedin position-absolute"></i>
     <span class="d-block">Linkedin</span>
@@ -22,7 +22,7 @@
     <span class="d-block">Github</span>
     <a href="https://github.com/yudonglin">github.com/yudonglin</a>
   </p>
-  
+
   <p class="open-sans-font custom-span-contact position-relative">
     <i class="bi bi-envelope-at-fill position-absolute"></i>
     <span class="d-block">Gmail</span>

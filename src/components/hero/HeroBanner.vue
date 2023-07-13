@@ -74,7 +74,7 @@ export default {
         heroTitleName: "Yudong Lin",
         heroDesignation: "software engineer",
         heroDescriptions: `
-        a recent graduate seeking an entry-level role in a technology company to further grow my knowledge and experience.
+        I am a recent graduate seeking an entry-level role in a technology company to further grow my knowledge and experience.
         In my spare time, I am also an indie game designer, focusing on several different scale game projects.`,
         heroBtn: "more about me",
       },

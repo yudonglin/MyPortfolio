@@ -97,6 +97,8 @@
                       <!-- {/*  Main Project Content Starts */} -->
                       <img :src="portfolio.img" alt="Portolio"/>
                       <!-- {/* Main Project Content Ends */} -->
+                      <p></p>
+                      <p v-for="description in portfolio.descriptions" v-bind:key="description">{{ description }}</p>
                     </figure>
                   </div>
                 </div>

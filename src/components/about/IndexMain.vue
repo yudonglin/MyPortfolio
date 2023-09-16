@@ -28,9 +28,9 @@
             <!-- {/* End personal info */} -->
 
             <div class="col-12 mt-1">
-              <a :href="cv" class="button" download>
-                <span class="button-text">Download CV</span>
-                <span class="button-icon fa fa-download"></span>
+              <a class="button" href="https://flowcv.com/resume/nlehcfr9n1">
+                <span class="button-text">Online Resume</span>
+                <span class="button-icon fa fa-link"></span>
               </a>
             </div>
             <!-- {/* End download button */} -->
@@ -105,8 +105,7 @@ export default {
   },
   data() {
     return {
-      imgMobile: require(`@/assets/images/hero/img-mobile.jpg`),
-      cv: require(`@/assets/images/cv.webp`),
+      imgMobile: require(`@/assets/images/hero/img-mobile.jpg`)
     };
   },
 };

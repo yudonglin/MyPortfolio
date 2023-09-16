@@ -2,8 +2,6 @@
 node_modules
 /dist
 /.idea
-/src/assets/scss
-/src/assets/fonts
 
 # local env files
 .env.local

@@ -1,0 +1,116 @@
+.modal-content {
+  background: #111;
+  height: 75vh;
+}
+
+.blog-modal {
+  .modal-content {
+    background: #252525;
+  }
+}
+
+.blog-modal .modal-body {
+  padding: 0 50px;
+  @media (max-width: 767px) {
+    padding: 0 15px;
+  }
+}
+
+.blog-post .title-section {
+  padding: 60px 0;
+}
+
+.close-modal {
+  background: transparent;
+  border: none;
+  display: flex;
+  height: 45px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 45px;
+  z-index: 5;
+  transition: 0.3s;
+  filter: invert(0.8);
+
+  &:hover {
+    filter: invert(1);
+  }
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-track {
+  background: #333; /* color of the tracking area */
+}
+
+.modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+  background-color: #555; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 1px solid #333; /* creates padding around scroll thumb */
+}
+
+body.light .modal-dialog-scrollable .modal-body::-webkit-scrollbar-track {
+  background: #fff; /* color of the tracking area */
+}
+
+body.light .modal-dialog-scrollable .modal-body::-webkit-scrollbar-thumb {
+  background-color: #bbb; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 1px solid #fff; /* creates padding around scroll thumb */
+}
+
+.portfolio-modal {
+  height: auto;
+
+  .modal-body {
+    padding: 0;
+  }
+}
+
+@media (min-width: 576px) {
+  .portfolio-modal.modal-dialog,
+  .blog-modal.modal-dialog {
+    max-width: 650px;
+  }
+}
+
+@media (min-width: 992px) {
+  .blog-modal.modal-dialog {
+    max-width: 750px;
+  }
+}
+
+body.light .modal-content {
+  background: #fff;
+}
+
+body.light .hero {
+  background: #fff;
+}
+
+body.light .close-modal {
+  filter: invert(0.5);
+
+  &:hover {
+    filter: invert(0.1);
+  }
+}
+
+body.light .header ul.icon-menu li.icon-box .active i {
+  color: #fff;
+}
+
+body.light .blog-post article h1 {
+  color: #666;
+}
+
+body.light .modal-body {
+  border: 2px solid #efefef;
+}
+
+body.light .home .bg {
+  box-shadow: none;
+}

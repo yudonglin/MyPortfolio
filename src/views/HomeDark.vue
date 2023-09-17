@@ -1,9 +1,9 @@
 <template>
   <main class="yellow">
     <div className="demo-sticker" title="Swich Light">
-      <a href="/light">
+      <router-link to="/light">
         <i aria-hidden="true" className="fa fa-lightbulb-o"></i>
-      </a>
+      </router-link>
     </div>
     <!-- End Sticker -->
 

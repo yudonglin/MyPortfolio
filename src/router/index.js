@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import NotFound from "../views/PageNotFound.vue";
+import NotFound from "@/views/PageNotFound.vue";
 
 const routes = [
     /*{
@@ -13,7 +13,7 @@ const routes = [
     {
         path: "/",
         name: "HomeDark",
-        component: () => import("../views/HomeDark.vue"),
+        component: () => import("@/views/HomeDark.vue"),
         meta: {
             title: "Yudong Lin",
         },
@@ -21,7 +21,7 @@ const routes = [
     {
         path: "/light",
         name: "HomeLight",
-        component: () => import("../views/HomeLight.vue"),
+        component: () => import("@/views/HomeLight.vue"),
         meta: {
             title: "Yudong Lin",
         },
@@ -36,7 +36,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory("MyPortfolio"),
+    history: createWebHistory(),
     routes,
 });
 

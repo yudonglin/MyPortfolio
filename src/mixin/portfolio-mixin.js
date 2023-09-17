@@ -26,7 +26,7 @@ export default {
                     contributors: "Me",
                     language: "Typescript, C#",
                     preview: "github.com",
-                    previewLink: "http://dawnlit.com:18989/",
+                    previewLink: "http://dawnlit.com",
                     descriptions: [
                         "• A social media site helps people who like technology to connect and share ideas.",
                         "• Making client-server interactions flexible and scalable by adopting RESTful API design methodology.",

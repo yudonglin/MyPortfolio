@@ -27,7 +27,7 @@ const projects: Project[] = [
         description:
             'Enhanced airplane departure prediction accuracy by 50% using LightGBM and Optuna. Built federated learning models with TensorFlow and Flower. Team placed 4th out of 49 competitors.',
         tags: ['Python', 'LightGBM', 'TensorFlow', 'Flower', 'Optuna'],
-        link: null,
+        link: 'https://www.tacoma.uw.edu/news/set-team-wins-national-airspace-system-competition',
         highlight: 'Published at KDD 2023',
         category: 'ai',
     },
@@ -100,14 +100,27 @@ export default function Projects() {
     const [pypiStats, setPypiStats] = useState<Record<string, string>>({});
 
     useEffect(() => {
-        projects
-            .filter((p) => p.pypiPackage)
-            .forEach(async (p) => {
-                const value = await fetchPyPIDownloads(p.pypiPackage!);
-                if (value) {
-                    setPypiStats((prev) => ({ ...prev, [p.pypiPackage!]: value }));
+        let cancelled = false;
+
+        async function loadStats() {
+            const pypiProjects = projects.filter((p) => p.pypiPackage);
+            const results = await Promise.all(
+                pypiProjects.map((p) => fetchPyPIDownloads(p.pypiPackage!)),
+            );
+            if (cancelled) return;
+            const stats: Record<string, string> = {};
+            pypiProjects.forEach((p, i) => {
+                if (results[i]) {
+                    stats[p.pypiPackage!] = results[i];
                 }
             });
+            setPypiStats(stats);
+        }
+
+        loadStats();
+        return () => {
+            cancelled = true;
+        };
     }, []);
 
     function getHighlight(project: Project): string | null {

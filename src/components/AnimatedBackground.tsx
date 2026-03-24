@@ -79,7 +79,7 @@ export default function AnimatedBackground() {
                 // Draw particle
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `${p.color} ${p.alpha})`;
+                ctx.fillStyle = `${p.color}${p.alpha})`;
                 ctx.fill();
             }
 

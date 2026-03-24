@@ -73,7 +73,6 @@
     object-fit: cover;
     vertical-align: middle;
     flex-shrink: 0;
-    color: var(--accent-cyan);
 }
 
 .org a {

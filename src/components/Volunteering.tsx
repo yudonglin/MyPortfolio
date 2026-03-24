@@ -1,10 +1,14 @@
 import styles from './Volunteering.module.css';
+import sekaiBeyondLogo from '../assets/icons/sekai-beyond.jpg';
+import cseedLogo from '../assets/icons/cseed.jpg';
+import codedayLogo from '../assets/icons/codeday.jpg';
 
 const volunteering = [
     {
         title: 'Technical Lead',
         organization: 'Sekai Beyond',
         period: 'Jan 2025 - Present',
+        icon: <img src={sekaiBeyondLogo} alt="Sekai Beyond" className={styles.orgIcon}/>,
         points: [
             'Collaborate in a cross-organization team with students from diverse backgrounds and institutions.',
             'Help develop and maintain the official website (sekaibeyond.com).',
@@ -19,6 +23,7 @@ const volunteering = [
         title: 'Technical Mentor',
         organization: 'cseed',
         period: 'Jan 2024 - Jun 2024',
+        icon: <img src={cseedLogo} alt="cseed" className={styles.orgIcon}/>,
         points: [
             'Guided students on their journey to becoming innovators, sharing strategies for success and inspiring positive community impact.',
             'Set up development environments, assisted in web development, and helped students evaluate technology stacks for their projects.',
@@ -33,6 +38,7 @@ const volunteering = [
         title: 'Mentor',
         organization: 'CodeDay',
         period: 'Nov 2019',
+        icon: <img src={codedayLogo} alt="CodeDay" className={styles.orgIcon}/>,
         points: [
             'Guided attendees through the event venue, offering information and insights about facilities and scheduled activities.',
             'Assisted participants with expertise in game development, mobile app development, and full-stack web development.',
@@ -54,17 +60,20 @@ export default function Volunteering() {
                     {volunteering.map((vol, i) => (
                         <div key={i} className={styles.card}>
                             <div className={styles.cardHeader}>
-                                <div>
-                                    <h3 className={styles.role}>{vol.title}</h3>
-                                    <p className={styles.org}>
-                                        {vol.link ? (
-                                            <a href={vol.link} target="_blank" rel="noopener noreferrer">
-                                                {vol.organization}
-                                            </a>
-                                        ) : (
-                                            vol.organization
-                                        )}
-                                    </p>
+                                <div className={styles.cardTitle}>
+                                    {vol.icon}
+                                    <div>
+                                        <h3 className={styles.role}>{vol.title}</h3>
+                                        <p className={styles.org}>
+                                            {vol.link ? (
+                                                <a href={vol.link} target="_blank" rel="noopener noreferrer">
+                                                    {vol.organization}
+                                                </a>
+                                            ) : (
+                                                vol.organization
+                                            )}
+                                        </p>
+                                    </div>
                                 </div>
                                 <span className={styles.period}>{vol.period}</span>
                             </div>

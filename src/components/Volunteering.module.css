@@ -54,10 +54,26 @@
     font-weight: 600;
 }
 
+.cardTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .org {
     font-size: 0.95rem;
     color: var(--accent-blue);
     margin-top: 2px;
+}
+
+.orgIcon {
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
+    object-fit: cover;
+    vertical-align: middle;
+    flex-shrink: 0;
+    color: var(--accent-cyan);
 }
 
 .org a {

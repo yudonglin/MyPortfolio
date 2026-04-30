@@ -7,7 +7,7 @@ const experiences = [
         period: 'Jul 2025 - Sep 2025',
         points: [
             'Assisted in deploying the SAP ERP system through user acceptance testing, issue tracking, and cross-department coordination.',
-            'Automated data processing with Python, increasing efficiency by 30% and reducing manual data entry errors.',
+            <span>Automated data processing with Python, <strong>increasing efficiency by 30%</strong> and reducing manual data entry errors.</span>,
             'Collaborated with production, warehouse, and quality teams to validate ERP data accuracy.',
             'Conducted research on AI applications for manufacturing optimization, supporting the company\'s digital transformation strategy.',
         ],
@@ -18,7 +18,7 @@ const experiences = [
         company: 'Be&be International LLC',
         period: 'Feb 2024 - Sep 2024',
         points: [
-            'Developed a .NET MAUI-based automation tool that reduced logistics team workload by 50%.',
+            <span>Developed a .NET MAUI-based automation tool that <strong>reduced logistics team workload by 50%</strong>.</span>,
             'Configured professional email systems to improve team communication and security.',
             'Designed and implemented responsive web interfaces in Angular, improving customer engagement.',
         ],
@@ -30,9 +30,9 @@ const experiences = [
         period: 'Mar 2023 - Aug 2023',
         points: [
             'Participated in a NASA international competition to enhance airplane departure prediction systems.',
-            'Enhanced flight departure prediction accuracy by 50% through optimized feature engineering and LightGBM tuning with Optuna.',
+            <span>Enhanced flight departure prediction accuracy by <strong>50%</strong> through optimized feature engineering and LightGBM tuning with Optuna.</span>,
             'Built and deployed federated learning models using TensorFlow and Flower.',
-            'Team achieved 4th place among 49 competitors. Published at KDD 2023.',
+            <span>Team achieved <strong>4th place among 49 competitors</strong>. Published at <strong>KDD 2023</strong>.</span>,
         ],
         tags: ['LightGBM', 'TensorFlow', 'Federated Learning', 'Optuna'],
     },

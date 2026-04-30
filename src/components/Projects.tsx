@@ -40,6 +40,7 @@ const projects: Project[] = [
         link: 'https://github.com/LinpgFoundation/linpg',
         highlight: 'Foundation Project',
         category: 'gamedev',
+        pypiPackage: 'linpg',
     },
     {
         title: 'GFL: Last Wish',
@@ -85,14 +86,18 @@ const categories = [
     { key: 'gamedev', label: 'Game Development' },
 ] as const;
 
-async function fetchPyPIDownloads(packageName: string): Promise<string | null> {
+async function fetchPyPIDownloads(packageName: string): Promise<string | 'error'> {
     try {
         const res = await fetch(`https://img.shields.io/pypi/dm/${packageName}.json`);
-        if (!res.ok) return null;
+        if (!res.ok) return 'error';
         const data = await res.json();
-        return data?.value ?? null;
+        const value = data?.value;
+        if (!value || value.toLowerCase().includes('rate limited') || value.toLowerCase().includes('error')) {
+            return 'error';
+        }
+        return value;
     } catch {
-        return null;
+        return 'error';
     }
 }
 
@@ -110,9 +115,7 @@ export default function Projects() {
             if (cancelled) return;
             const stats: Record<string, string> = {};
             pypiProjects.forEach((p, i) => {
-                if (results[i]) {
-                    stats[p.pypiPackage!] = results[i];
-                }
+                stats[p.pypiPackage!] = results[i];
             });
             setPypiStats(stats);
         }
@@ -125,6 +128,9 @@ export default function Projects() {
 
     function getHighlight(project: Project): string | null {
         if (project.pypiPackage && pypiStats[project.pypiPackage]) {
+            if (pypiStats[project.pypiPackage] === 'error') {
+                return 'Available on PyPI';
+            }
             return `${pypiStats[project.pypiPackage]} on PyPI`;
         }
         return project.highlight;
@@ -147,7 +153,7 @@ export default function Projects() {
                                 {items.map((project, i) => {
                                     const highlight = getHighlight(project);
                                     return (
-                                        <div key={i} className={styles.card}>
+                                        <article key={i} className={styles.card}>
                                             <div className={styles.cardTop}>
                                                 <div className={styles.folderIcon}>
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -178,7 +184,7 @@ export default function Projects() {
                                             </div>
                                             <h3 className={styles.projectTitle}>{project.title}</h3>
                                             {highlight && (
-                                                <span className={styles.highlight}>{highlight}</span>
+                                                <span className={styles.highlight}><strong>{highlight}</strong></span>
                                             )}
                                             <p className={styles.projectDesc}>{project.description}</p>
                                             <div className={styles.tags}>
@@ -186,7 +192,7 @@ export default function Projects() {
                                                     <span key={tag} className={styles.tag}>{tag}</span>
                                                 ))}
                                             </div>
-                                        </div>
+                                        </article>
                                     );
                                 })}
                             </div>

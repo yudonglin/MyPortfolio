@@ -1,10 +1,15 @@
 import styles from './Experience.module.css';
+import cflLogo from '../assets/icons/cfl.jpg';
+import bebeLogo from '../assets/icons/bebe.jpg';
+import uwLogo from '../assets/icons/uw.jpg';
 
 const experiences = [
     {
         title: 'ERP Implementation Intern',
         company: 'CFL Flooring',
         period: 'Jul 2025 - Sep 2025',
+        link: 'https://cflflooring.com/',
+        logo: <img src={cflLogo} alt="CFL Flooring" className={styles.companyIcon}/>,
         points: [
             'Assisted in deploying the SAP ERP system through user acceptance testing, issue tracking, and cross-department coordination.',
             <span>Automated data processing with Python, <strong>increasing efficiency by 30%</strong> and reducing manual data entry errors.</span>,
@@ -17,6 +22,8 @@ const experiences = [
         title: 'Support Engineer',
         company: 'Be&be International LLC',
         period: 'Feb 2024 - Sep 2024',
+        link: 'https://benbeintl.com/',
+        logo: <img src={bebeLogo} alt="Be&be International" className={styles.companyIcon}/>,
         points: [
             <span>Developed a .NET MAUI-based automation tool that <strong>reduced logistics team workload by 50%</strong>.</span>,
             'Configured professional email systems to improve team communication and security.',
@@ -28,6 +35,8 @@ const experiences = [
         title: 'Researcher in Machine Learning',
         company: 'University of Washington',
         period: 'Mar 2023 - Aug 2023',
+        link: 'https://www.washington.edu/',
+        logo: <img src={uwLogo} alt="University of Washington" className={styles.companyIcon}/>,
         points: [
             'Participated in a NASA international competition to enhance airplane departure prediction systems.',
             <span>Enhanced flight departure prediction accuracy by <strong>50%</strong> through optimized feature engineering and LightGBM tuning with Optuna.</span>,
@@ -49,9 +58,17 @@ export default function Experience() {
                     {experiences.map((exp, i) => (
                         <div key={i} className={styles.card}>
                             <div className={styles.cardHeader}>
-                                <div>
-                                    <h3 className={styles.role}>{exp.title}</h3>
-                                    <p className={styles.company}>{exp.company}</p>
+                                <div className={styles.companyInfo}>
+                                    {exp.logo}
+                                    <div>
+                                        <h3 className={styles.role}>{exp.title}</h3>
+                                        <p className={styles.company}>
+                                            <a href={exp.link} target="_blank" rel="noopener noreferrer"
+                                               className={styles.companyLink}>
+                                                {exp.company}
+                                            </a>
+                                        </p>
+                                    </div>
                                 </div>
                                 <span className={styles.period}>{exp.period}</span>
                             </div>

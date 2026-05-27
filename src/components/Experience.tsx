@@ -52,7 +52,7 @@ export default function Experience() {
         <section id="experience" className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>02.</span> Experience
+                    <span className={styles.headingAccent}>03.</span> Experience
                 </h2>
                 <div className={styles.timeline}>
                     {experiences.map((exp, i) => (

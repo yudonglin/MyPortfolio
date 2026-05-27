@@ -32,7 +32,7 @@ export default function Publications() {
         <section id="publications" className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>04.</span> Publications
+                    <span className={styles.headingAccent}>05.</span> Publications
                 </h2>
                 <div className={styles.list}>
                     {publications.map((pub, i) => (

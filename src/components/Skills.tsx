@@ -44,7 +44,7 @@ export default function Skills() {
         <section id="skills" className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>06.</span> Skills
+                    <span className={styles.headingAccent}>07.</span> Skills
                 </h2>
                 <div className={styles.grid}>
                     {skillCategories.map((cat, i) => (

@@ -140,7 +140,7 @@ export default function Projects() {
         <section id="projects" className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>03.</span> Projects
+                    <span className={styles.headingAccent}>04.</span> Projects
                 </h2>
 
                 {categories.map(({ key, label }) => {

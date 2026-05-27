@@ -11,11 +11,6 @@ export default function Hero() {
                     I build intelligent systems with{' '}
                     <span className={styles.accent}>AI & Data Science</span>
                 </h2>
-                <p className={styles.description}>
-                    M.S. in Information Management (Data Science & AI) at the University of Washington.
-                    I specialize in machine learning, LLM applications, and full-stack development.
-                    Previously recognized for NASA research (Top 4/49) and published at KDD 2023.
-                </p>
                 <div className={styles.actions}>
                     <a href="mailto:wynterlyd@gmail.com" className={styles.primaryBtn}>
                         Get in Touch

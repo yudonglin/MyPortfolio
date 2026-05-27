@@ -2,7 +2,7 @@
 
 Personal portfolio website built with React, TypeScript, and Vite. Showcasing experience in AI, Data Science, Machine Learning, and Game Development.
 
-**Live site:** [yudonglin.github.io/MyPortfolio](https://yudonglin.github.io/MyPortfolio/)
+**Live site:** [yudonglin.github.io/MyPortfolio](https://wynter.icu/)
 
 ## Tech Stack
 

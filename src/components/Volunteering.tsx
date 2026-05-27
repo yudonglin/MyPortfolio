@@ -54,7 +54,7 @@ export default function Volunteering() {
         <section id="volunteering" className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>04.</span> Volunteering
+                    <span className={styles.headingAccent}>05.</span> Volunteering
                 </h2>
                 <div className={styles.timeline}>
                     {volunteering.map((vol, i) => (

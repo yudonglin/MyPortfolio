@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import Publications from './components/Publications';
 import Skills from './components/Skills';
 import Volunteering from './components/Volunteering';
 import Footer from './components/Footer';
@@ -17,6 +18,7 @@ export default function App() {
                     <Hero/>
                     <Experience/>
                     <Projects/>
+                    <Publications/>
                     <Volunteering/>
                     <Skills/>
                 </main>

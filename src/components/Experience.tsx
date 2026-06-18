@@ -2,8 +2,23 @@ import styles from './Experience.module.css';
 import cflLogo from '../assets/icons/cfl.jpg';
 import bebeLogo from '../assets/icons/bebe.jpg';
 import uwLogo from '../assets/icons/uw.jpg';
+import watechLogo from '../assets/icons/watech.jpg';
 
 const experiences = [
+    {
+        title: 'AI/ML Engineer (MSIM Capstone)',
+        company: 'Washington Technology Solutions (WaTech)',
+        period: 'Nov 2025 - Jun 2026',
+        link: 'https://watech.wa.gov/',
+        logo: <img src={watechLogo} alt="Washington Technology Solutions (WaTech)" className={styles.companyIcon}/>,
+        points: [
+            <span>Led a team of 4 on an <strong>MSIM Capstone</strong> project, authoring the full codebase — a <strong>React + TypeScript</strong> frontend and <strong>Python/FastAPI</strong> backend with OpenAI-compatible, real-time streaming API integration.</span>,
+            'Engineered prompt templates meeting U.S. Plain Language standards for WA open government data on the Socrata platform, with prompt-injection hardening grounded in the portal\'s live category and tag vocabulary.',
+            <span>Fine-tuned an open-weight model (<strong>Microsoft Phi-4</strong>) with QLoRA SFT + DPO, delivering <strong>zero-API-cost</strong>, fully private on-premise column-description generation.</span>,
+            <span>Built an <strong>LLM-as-Judge</strong> evaluation tool scoring metadata on an 8-category, WA-aligned rubric plus deterministic plain-language checks, deployed to <strong>Databricks Apps</strong>.</span>,
+        ],
+        tags: ['LLMs', 'Prompt Engineering', 'Fine-Tuning (LoRA/DPO)', 'FastAPI', 'Socrata'],
+    },
     {
         title: 'ERP Implementation Intern',
         company: 'CFL Flooring',

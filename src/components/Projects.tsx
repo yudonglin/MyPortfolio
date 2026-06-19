@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './Projects.module.css';
+import predictPushbackImg from '../assets/projects/PredictPushback.webp';
+import linpgImg from '../assets/projects/linpg.webp';
+import gflLastWishImg from '../assets/projects/GFL-LastWish.webp';
+import sundewValleyImg from '../assets/projects/SundewValley.webp';
+import linpgToolboxImg from '../assets/projects/linpgtoolbox.webp';
+import sekaiBeyondImg from '../assets/projects/SekaiBeyond.webp';
 
 type Project = {
     title: string;
@@ -7,8 +13,12 @@ type Project = {
     tags: string[];
     link: string | null;
     highlight: string | null;
-    category: 'ai' | 'gamedev';
+    category: 'ai' | 'web' | 'gamedev';
     pypiPackage?: string;
+    // Optional custom preview. Import a screenshot at the top of this file
+    // (e.g. `import smartRxImg from '../assets/projects/smart-prescription.png'`)
+    // and set `image: smartRxImg` to override the auto GitHub social card.
+    image?: string;
 };
 
 const projects: Project[] = [
@@ -30,6 +40,18 @@ const projects: Project[] = [
         link: 'https://www.tacoma.uw.edu/news/set-team-wins-national-airspace-system-competition',
         highlight: 'Published at KDD 2023',
         category: 'ai',
+        image: predictPushbackImg,
+    },
+    // Web Development
+    {
+        title: 'Sekai Beyond',
+        description:
+            'The official website for Sekai Beyond, a UW student community for anime, gaming, cosplay, and creation. Built and maintained as Technical Lead, serving 400+ members and 600+ followers.',
+        tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Vite'],
+        link: 'https://sekaibeyond.com/',
+        highlight: 'Live Site',
+        category: 'web',
+        image: sekaiBeyondImg,
     },
     // Game Dev
     {
@@ -41,6 +63,7 @@ const projects: Project[] = [
         highlight: 'Foundation Project',
         category: 'gamedev',
         pypiPackage: 'linpg',
+        image: linpgImg,
     },
     {
         title: 'GFL: Last Wish',
@@ -50,6 +73,7 @@ const projects: Project[] = [
         link: 'https://github.com/LinpgFoundation/GFL-LastWish',
         highlight: '18 stars on GitHub',
         category: 'gamedev',
+        image: gflLastWishImg,
     },
     {
         title: 'Visual Novel Script (VNS)',
@@ -68,6 +92,7 @@ const projects: Project[] = [
         link: 'https://github.com/HuskyDevClub/SundewValley',
         highlight: null,
         category: 'gamedev',
+        image: sundewValleyImg,
     },
     {
         title: 'Linpg Toolbox',
@@ -78,13 +103,31 @@ const projects: Project[] = [
         highlight: null,
         category: 'gamedev',
         pypiPackage: 'linpgtoolbox',
+        image: linpgToolboxImg,
     },
 ];
 
 const categories = [
     { key: 'ai', label: 'AI & Data Science' },
+    { key: 'web', label: 'Web Development' },
     { key: 'gamedev', label: 'Game Development' },
 ] as const;
+
+// Derive GitHub's auto-generated social preview card from a repo URL.
+// Returns null for non-GitHub links (e.g. the NASA news article).
+function githubPreview(link: string | null): string | null {
+    if (!link) return null;
+    try {
+        const url = new URL(link);
+        if (url.hostname !== 'github.com') return null;
+        const parts = url.pathname.split('/').filter(Boolean);
+        if (parts.length < 2) return null;
+        const [owner, repo] = parts;
+        return `https://opengraph.githubassets.com/1/${owner}/${repo}`;
+    } catch {
+        return null;
+    }
+}
 
 async function fetchPyPIDownloads(packageName: string): Promise<string | 'error'> {
     try {
@@ -103,6 +146,7 @@ async function fetchPyPIDownloads(packageName: string): Promise<string | 'error'
 
 export default function Projects() {
     const [pypiStats, setPypiStats] = useState<Record<string, string>>({});
+    const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
 
     useEffect(() => {
         let cancelled = false;
@@ -152,45 +196,77 @@ export default function Projects() {
                             <div className={styles.grid}>
                                 {items.map((project, i) => {
                                     const highlight = getHighlight(project);
+                                    const preview = project.image ?? githubPreview(project.link);
+                                    const showImage = preview && !failedImages[project.title];
                                     return (
                                         <article key={i} className={styles.card}>
-                                            <div className={styles.cardTop}>
-                                                <div className={styles.folderIcon}>
-                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                         stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"
-                                                         strokeLinejoin="round">
-                                                        <path
-                                                            d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
-                                                    </svg>
-                                                </div>
-                                                {project.link && (
-                                                    <a
-                                                        href={project.link}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className={styles.externalLink}
-                                                        aria-label={`View ${project.title} on GitHub`}
-                                                    >
-                                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            <div className={styles.media}>
+                                                {showImage ? (
+                                                    <img
+                                                        src={preview}
+                                                        alt={`${project.title} preview`}
+                                                        className={styles.previewImg}
+                                                        loading="lazy"
+                                                        onError={() =>
+                                                            setFailedImages((prev) => ({
+                                                                ...prev,
+                                                                [project.title]: true,
+                                                            }))
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <div className={styles.previewFallback} aria-hidden="true">
+                                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
                                                              stroke="currentColor" strokeWidth="1.5"
                                                              strokeLinecap="round" strokeLinejoin="round">
                                                             <path
-                                                                d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                                            <polyline points="15 3 21 3 21 9"/>
-                                                            <line x1="10" y1="14" x2="21" y2="3"/>
+                                                                d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
                                                         </svg>
-                                                    </a>
+                                                    </div>
                                                 )}
                                             </div>
-                                            <h3 className={styles.projectTitle}>{project.title}</h3>
-                                            {highlight && (
-                                                <span className={styles.highlight}><strong>{highlight}</strong></span>
-                                            )}
-                                            <p className={styles.projectDesc}>{project.description}</p>
-                                            <div className={styles.tags}>
-                                                {project.tags.map((tag) => (
-                                                    <span key={tag} className={styles.tag}>{tag}</span>
-                                                ))}
+                                            <div className={styles.cardBody}>
+                                                <div className={styles.cardTop}>
+                                                    <div className={styles.folderIcon}>
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                             stroke="currentColor" strokeWidth="1.5"
+                                                             strokeLinecap="round"
+                                                             strokeLinejoin="round">
+                                                            <path
+                                                                d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
+                                                        </svg>
+                                                    </div>
+                                                    {project.link && (
+                                                        <a
+                                                            href={project.link}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className={styles.externalLink}
+                                                            aria-label={`View ${project.title}${project.link.includes('github.com') ? ' on GitHub' : ''}`}
+                                                        >
+                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                                 stroke="currentColor" strokeWidth="1.5"
+                                                                 strokeLinecap="round" strokeLinejoin="round">
+                                                                <path
+                                                                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                                                <polyline points="15 3 21 3 21 9"/>
+                                                                <line x1="10" y1="14" x2="21" y2="3"/>
+                                                            </svg>
+                                                        </a>
+                                                    )}
+                                                </div>
+                                                <h3 className={styles.projectTitle}>{project.title}</h3>
+                                                {highlight && (
+                                                    <span className={styles.highlight}>
+                                                        <strong>{highlight}</strong>
+                                                    </span>
+                                                )}
+                                                <p className={styles.projectDesc}>{project.description}</p>
+                                                <div className={styles.tags}>
+                                                    {project.tags.map((tag) => (
+                                                        <span key={tag} className={styles.tag}>{tag}</span>
+                                                    ))}
+                                                </div>
                                             </div>
                                         </article>
                                     );

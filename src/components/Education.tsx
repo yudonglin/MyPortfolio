@@ -22,7 +22,7 @@ const education: School[] = [
         degrees: [
             {
                 degree: 'M.S. in Information Management (Data Science & AI)',
-                period: 'Expected Jun 2026',
+                period: 'Graduated Jun 2026',
                 honors: ['MSIM Dean’s Scholarship'],
             },
             {

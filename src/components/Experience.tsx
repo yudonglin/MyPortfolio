@@ -34,7 +34,7 @@ const experiences = [
         tags: ['Python', 'SAP ERP', 'AI Research', 'Data Processing'],
     },
     {
-        title: 'Support Engineer',
+        title: 'Software Engineer',
         company: 'Be&be International LLC',
         period: 'Feb 2024 - Sep 2024',
         link: 'https://benbeintl.com/',
@@ -47,7 +47,7 @@ const experiences = [
         tags: ['.NET MAUI', 'Angular', 'Automation', 'Web Dev'],
     },
     {
-        title: 'Researcher in Machine Learning',
+        title: 'Machine Learning Researcher',
         company: 'University of Washington',
         period: 'Mar 2023 - Aug 2023',
         link: 'https://www.washington.edu/',

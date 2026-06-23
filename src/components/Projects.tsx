@@ -6,6 +6,7 @@ import gflLastWishImg from '../assets/projects/GFL-LastWish.webp';
 import sundewValleyImg from '../assets/projects/SundewValley.webp';
 import linpgToolboxImg from '../assets/projects/linpgtoolbox.webp';
 import sekaiBeyondImg from '../assets/projects/SekaiBeyond.webp';
+import smartPrescriptionImg from '../assets/projects/SmartPrescription.webp';
 
 type Project = {
     title: string;
@@ -31,6 +32,7 @@ const projects: Project[] = [
         link: 'https://github.com/yudonglin/SmartPrescription',
         highlight: '3rd Prize - UW iSchool Startup Pitch',
         category: 'ai',
+        image: smartPrescriptionImg,
     },
     {
         title: 'NASA Flight Prediction Research',

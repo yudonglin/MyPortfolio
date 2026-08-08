@@ -4,6 +4,12 @@ export const SITE = {
     github: 'https://github.com/yudonglin',
     linkedin: 'https://www.linkedin.com/in/wynterlin/',
     license: 'https://www.gnu.org/licenses/agpl-3.0.html',
+    /**
+     * Canonical deployed URL, no trailing slash. The build substitutes this for
+     * every `__SITE_URL__` token in index.html and generates robots.txt and
+     * sitemap.xml from it, so it is the only place it needs changing.
+     */
+    url: 'https://wynter.icu',
 } as const;
 
 export const MAILTO = `mailto:${SITE.email}`;

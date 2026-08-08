@@ -12,6 +12,10 @@
           name="description"/>
     <meta content="Wynter Lin, AI, Data Science, Machine Learning, Engineer, Developer, Portfolio, Python, React, LLM"
           name="keywords"/>
+    <!-- The placeholder below is substituted at build time from SITE.url in
+         src/site.ts. It stays literal under `vite dev`, which is never crawled. -->
+    <link href="__SITE_URL__/" rel="canonical"/>
+    <meta content="__SITE_URL__/" property="og:url"/>
     <meta content="Wynter Lin | AI & Data Science Engineer" property="og:title"/>
     <meta content="Portfolio of Wynter Lin, specializing in machine learning, LLM applications, and full-stack development."
           property="og:description"/>
@@ -30,7 +34,7 @@
                 "@type": "CollegeOrUniversity",
                 "name": "University of Washington"
             },
-            "url": "https://yudonglin.github.io",
+            "url": "__SITE_URL__",
             "sameAs": [
                 "https://github.com/yudonglin"
             ],

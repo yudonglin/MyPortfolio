@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { type SectionId, sectionOrdinal } from '../sections';
+import Reveal from './Reveal';
 import styles from './Section.module.css';
 
 type SectionProps = {
@@ -14,9 +15,11 @@ export default function Section({ id, title, children }: SectionProps) {
     return (
         <section id={id} className={styles.section}>
             <div className={styles.container}>
-                <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>{sectionOrdinal(id)}.</span> {title}
-                </h2>
+                <Reveal>
+                    <h2 className={styles.heading}>
+                        <span className={styles.headingAccent}>{sectionOrdinal(id)}.</span> {title}
+                    </h2>
+                </Reveal>
                 {children}
             </div>
         </section>

@@ -44,6 +44,14 @@
             ]
         }
     </script>
+    <script>
+        /* Scroll-reveal content starts hidden only once we know something will
+           reveal it. Without this class the stylesheet leaves everything
+           visible, so a browser with no IntersectionObserver -- or no script at
+           all -- never gets stranded looking at an empty page. Inline and in
+           <head> so it lands before first paint, with no flash. */
+        if ('IntersectionObserver' in window) document.documentElement.classList.add('js');
+    </script>
 </head>
 <body>
 <div id="root"></div>

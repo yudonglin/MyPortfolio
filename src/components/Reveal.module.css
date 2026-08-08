@@ -1,0 +1,32 @@
+/*
+ * The hidden state is scoped to `html.js`, set by the inline script in
+ * index.html only when IntersectionObserver exists. Without it the prerendered
+ * markup would be invisible to exactly the readers the prerender is for.
+ *
+ * The lift uses `translate` rather than `transform` so it composes with the
+ * hover lifts the cards inside already apply, instead of the two effects
+ * overwriting each other through the same property.
+ */
+.reveal {
+    transition: opacity 0.55s ease-out, translate 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--reveal-step, 0) * 70ms);
+}
+
+:global(html.js) .reveal {
+    opacity: 0;
+    translate: 0 16px;
+}
+
+:global(html.js) .reveal[data-revealed] {
+    opacity: 1;
+    translate: none;
+}
+
+/* The global opt-out in global.css collapses the transition, but the hidden
+   starting state is a plain declaration and has to be undone here. */
+@media (prefers-reduced-motion: reduce) {
+    :global(html.js) .reveal {
+        opacity: 1;
+        translate: none;
+    }
+}

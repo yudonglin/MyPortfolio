@@ -1,3 +1,4 @@
+import Reveal from './Reveal';
 import Section from './Section';
 import TimelineCard, { type TimelineEntry } from './TimelineCard';
 import listStyles from './Timeline.module.css';
@@ -69,7 +70,9 @@ export default function Experience() {
         <Section id="experience" title="Experience">
             <div className={listStyles.timeline}>
                 {experiences.map((entry) => (
-                    <TimelineCard key={`${entry.org}-${entry.title}`} entry={entry}/>
+                    <Reveal key={`${entry.org}-${entry.title}`}>
+                        <TimelineCard entry={entry}/>
+                    </Reveal>
                 ))}
             </div>
         </Section>

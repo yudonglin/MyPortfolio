@@ -1,3 +1,4 @@
+import Reveal from './Reveal';
 import Section from './Section';
 import TimelineCard, { type TimelineEntry } from './TimelineCard';
 import listStyles from './Timeline.module.css';
@@ -56,7 +57,9 @@ export default function Volunteering() {
         <Section id="volunteering" title="Volunteering">
             <div className={listStyles.timeline}>
                 {volunteering.map((entry) => (
-                    <TimelineCard key={`${entry.org}-${entry.title}`} entry={entry}/>
+                    <Reveal key={`${entry.org}-${entry.title}`}>
+                        <TimelineCard entry={entry}/>
+                    </Reveal>
                 ))}
             </div>
         </Section>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Reveal from './Reveal';
 import Section from './Section';
 import { ExternalLinkIcon, FolderIcon } from './icons';
 import styles from './Projects.module.css';
@@ -263,18 +264,21 @@ export default function Projects() {
         <Section id="projects" title="Projects">
             {groupedProjects.map(({ category, label, items }) => (
                 <div key={category} className={styles.categoryBlock}>
-                    <h3 className={styles.categoryTitle}>{label}</h3>
+                    <Reveal>
+                        <h3 className={styles.categoryTitle}>{label}</h3>
+                    </Reveal>
                     <div className={styles.grid}>
-                        {items.map((project) => (
-                            <ProjectCard
-                                key={project.title}
-                                project={project}
-                                highlight={highlightFor(project)}
-                                preview={previewFor(project)}
-                                onPreviewError={() =>
-                                    setFailedPreviews((prev) => new Set(prev).add(project.title))
-                                }
-                            />
+                        {items.map((project, i) => (
+                            <Reveal key={project.title} index={i}>
+                                <ProjectCard
+                                    project={project}
+                                    highlight={highlightFor(project)}
+                                    preview={previewFor(project)}
+                                    onPreviewError={() =>
+                                        setFailedPreviews((prev) => new Set(prev).add(project.title))
+                                    }
+                                />
+                            </Reveal>
                         ))}
                     </div>
                 </div>

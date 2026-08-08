@@ -4,9 +4,12 @@
     gap: 20px;
 }
 
+/* The reveal wrapper is the grid item and stretches to the row height, so the
+   card has to fill it to keep cards in a row the same height. */
 .card {
     composes: card from '../styles/primitives.module.css';
     padding: 28px;
+    height: 100%;
 }
 
 .cardIcon {

@@ -61,3 +61,23 @@ a {
     background: rgba(74, 158, 255, 0.3);
     color: #fff;
 }
+
+/*
+ * Every animation on the site is decorative, so honouring the OS preference
+ * means removing motion rather than shortening it. The negative delay starts
+ * each animation already finished, which matters for the staggered hero: a
+ * duration alone would still leave those elements hidden through their delay.
+ */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: -1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+    }
+}

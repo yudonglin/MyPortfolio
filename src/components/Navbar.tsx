@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useActiveSection } from '../hooks/useActiveSection';
 import { type SectionId, SECTIONS } from '../sections';
 import { MAILTO } from '../site';
 import styles from './Navbar.module.css';
@@ -8,6 +9,7 @@ const MENU_ID = 'primary-navigation';
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const activeSection = useActiveSection();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -17,7 +19,10 @@ export default function Navbar() {
 
     const scrollToSection = (id: SectionId) => {
         setMobileOpen(false);
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        // No explicit `behavior`, so this inherits `scroll-behavior` from the
+        // stylesheet — which global.css turns off under reduced motion. Passing
+        // 'smooth' here would override that and ignore the preference.
+        document.getElementById(id)?.scrollIntoView();
     };
 
     return (
@@ -43,7 +48,11 @@ export default function Navbar() {
                 >
                     {SECTIONS.map(({ id, label }) => (
                         <li key={id}>
-                            <button className={styles.link} onClick={() => scrollToSection(id)}>
+                            <button
+                                className={`${styles.link} ${activeSection === id ? styles.linkActive : ''}`}
+                                onClick={() => scrollToSection(id)}
+                                aria-current={activeSection === id ? 'true' : undefined}
+                            >
                                 {label}
                             </button>
                         </li>

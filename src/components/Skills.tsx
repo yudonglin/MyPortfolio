@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import Reveal from './Reveal';
 import Section from './Section';
 import { CodeIcon, NeuronIcon, StackIcon } from './icons';
 import styles from './Skills.module.css';
@@ -31,16 +32,18 @@ export default function Skills() {
     return (
         <Section id="skills" title="Skills">
             <div className={styles.grid}>
-                {skillCategories.map((cat) => (
-                    <div key={cat.title} className={styles.card}>
-                        <div className={styles.cardIcon}>{cat.icon}</div>
-                        <h3 className={styles.catTitle}>{cat.title}</h3>
-                        <div className={styles.skills}>
-                            {cat.skills.map((skill) => (
-                                <span key={skill} className={styles.skill}>{skill}</span>
-                            ))}
+                {skillCategories.map((cat, i) => (
+                    <Reveal key={cat.title} index={i}>
+                        <div className={styles.card}>
+                            <div className={styles.cardIcon}>{cat.icon}</div>
+                            <h3 className={styles.catTitle}>{cat.title}</h3>
+                            <div className={styles.skills}>
+                                {cat.skills.map((skill) => (
+                                    <span key={skill} className={styles.skill}>{skill}</span>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    </Reveal>
                 ))}
             </div>
         </Section>

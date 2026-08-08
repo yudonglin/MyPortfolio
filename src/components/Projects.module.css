@@ -31,7 +31,9 @@
 }
 
 /* Declared in full rather than composed from primitives: this card overrides
-   `transition`, and which declaration wins would depend on bundle order. */
+   `transition`, and which declaration wins would depend on bundle order.
+   `height` fills the reveal wrapper, which is the grid item and stretches to
+   the row height. */
 .card {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -39,6 +41,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
     transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
 }
 

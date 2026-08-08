@@ -1,3 +1,6 @@
+import { Fragment } from 'react';
+import Section from './Section';
+import { DocumentIcon } from './icons';
 import styles from './Publications.module.css';
 
 type Author = {
@@ -29,52 +32,42 @@ const publications: Publication[] = [
 
 export default function Publications() {
     return (
-        <section id="publications" className={styles.section}>
-            <div className={styles.container}>
-                <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>05.</span> Publications
-                </h2>
-                <div className={styles.list}>
-                    {publications.map((pub, i) => (
-                        <article key={i} className={styles.card}>
-                            <div className={styles.cardHeader}>
-                                <h3 className={styles.title}>
-                                    <a href={pub.link} target="_blank" rel="noopener noreferrer">
-                                        {pub.title}
-                                    </a>
-                                </h3>
-                                <span className={styles.venue}>{pub.venue}</span>
-                            </div>
-                            <p className={styles.authors}>
-                                {pub.authors.map((author, j) => (
-                                    <span key={j}>
-                                        <span className={author.isMe ? styles.authorMe : undefined}>
-                                            {author.name}
-                                        </span>
-                                        {j < pub.authors.length - 1 ? ', ' : ''}
-                                    </span>
-                                ))}
-                            </p>
-                            <div className={styles.actions}>
-                                <a
-                                    href={pub.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={styles.action}
-                                >
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                         stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-                                         strokeLinejoin="round">
-                                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                                        <polyline points="14 2 14 8 20 8"/>
-                                    </svg>
-                                    Read PDF
+        <Section id="publications" title="Publications">
+            <div className={styles.list}>
+                {publications.map((pub) => (
+                    <article key={pub.title} className={styles.card}>
+                        <div className={styles.cardHeader}>
+                            <h3 className={styles.title}>
+                                <a href={pub.link} target="_blank" rel="noopener noreferrer">
+                                    {pub.title}
                                 </a>
-                            </div>
-                        </article>
-                    ))}
-                </div>
+                            </h3>
+                            <span className={styles.venue}>{pub.venue}</span>
+                        </div>
+                        <p className={styles.authors}>
+                            {pub.authors.map((author, i) => (
+                                <Fragment key={author.name}>
+                                    <span className={author.isMe ? styles.authorMe : undefined}>
+                                        {author.name}
+                                    </span>
+                                    {i < pub.authors.length - 1 && ', '}
+                                </Fragment>
+                            ))}
+                        </p>
+                        <div className={styles.actions}>
+                            <a
+                                href={pub.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.action}
+                            >
+                                <DocumentIcon/>
+                                Read PDF
+                            </a>
+                        </div>
+                    </article>
+                ))}
             </div>
-        </section>
+        </Section>
     );
 }

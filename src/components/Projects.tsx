@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import Section from './Section';
+import { ExternalLinkIcon, FolderIcon } from './icons';
 import styles from './Projects.module.css';
 import predictPushbackImg from '../assets/projects/PredictPushback.webp';
 import linpgImg from '../assets/projects/linpg.webp';
@@ -8,22 +10,22 @@ import linpgToolboxImg from '../assets/projects/linpgtoolbox.webp';
 import sekaiBeyondImg from '../assets/projects/SekaiBeyond.webp';
 import smartPrescriptionImg from '../assets/projects/SmartPrescription.webp';
 
+type Category = 'ai' | 'web' | 'gamedev';
+
 type Project = {
     title: string;
     description: string;
     tags: string[];
     link: string | null;
     highlight: string | null;
-    category: 'ai' | 'web' | 'gamedev';
+    category: Category;
+    /** When set, the live download count replaces `highlight`. */
     pypiPackage?: string;
-    // Optional custom preview. Import a screenshot at the top of this file
-    // (e.g. `import smartRxImg from '../assets/projects/smart-prescription.png'`)
-    // and set `image: smartRxImg` to override the auto GitHub social card.
+    /** Overrides the auto-generated GitHub social card. */
     image?: string;
 };
 
 const projects: Project[] = [
-    // AI & Data Science
     {
         title: 'Smart Prescription',
         description:
@@ -44,7 +46,6 @@ const projects: Project[] = [
         category: 'ai',
         image: predictPushbackImg,
     },
-    // Web Development
     {
         title: 'Sekai Beyond',
         description:
@@ -55,7 +56,6 @@ const projects: Project[] = [
         category: 'web',
         image: sekaiBeyondImg,
     },
-    // Game Dev
     {
         title: 'Linpg Game Engine',
         description:
@@ -109,61 +109,133 @@ const projects: Project[] = [
     },
 ];
 
-const categories = [
-    { key: 'ai', label: 'AI & Data Science' },
-    { key: 'web', label: 'Web Development' },
-    { key: 'gamedev', label: 'Game Development' },
-] as const;
+const CATEGORY_LABELS: Record<Category, string> = {
+    ai: 'AI & Data Science',
+    web: 'Web Development',
+    gamedev: 'Game Development',
+};
 
-// Derive GitHub's auto-generated social preview card from a repo URL.
-// Returns null for non-GitHub links (e.g. the NASA news article).
-function githubPreview(link: string | null): string | null {
+/** Grouped once at module scope — `projects` never changes. */
+const groupedProjects = (Object.keys(CATEGORY_LABELS) as Category[])
+    .map((category) => ({
+        category,
+        label: CATEGORY_LABELS[category],
+        items: projects.filter((p) => p.category === category),
+    }))
+    .filter((group) => group.items.length > 0);
+
+const pypiPackages = projects
+    .map((p) => p.pypiPackage)
+    .filter((pkg): pkg is string => pkg !== undefined);
+
+/** Parses `owner`/`repo` out of a GitHub URL. Null for any other host. */
+function githubRepo(link: string | null): { owner: string; repo: string } | null {
     if (!link) return null;
     try {
         const url = new URL(link);
         if (url.hostname !== 'github.com') return null;
-        const parts = url.pathname.split('/').filter(Boolean);
-        if (parts.length < 2) return null;
-        const [owner, repo] = parts;
-        return `https://opengraph.githubassets.com/1/${owner}/${repo}`;
+        const [owner, repo] = url.pathname.split('/').filter(Boolean);
+        if (!owner || !repo) return null;
+        return { owner, repo };
     } catch {
         return null;
     }
 }
 
-async function fetchPyPIDownloads(packageName: string): Promise<string | 'error'> {
+/** GitHub's auto-generated social preview card for a repo. */
+function githubPreview(link: string | null): string | null {
+    const repo = githubRepo(link);
+    return repo ? `https://opengraph.githubassets.com/1/${repo.owner}/${repo.repo}` : null;
+}
+
+/** Monthly download count via shields.io, or null when unavailable. */
+async function fetchPyPIDownloads(packageName: string): Promise<string | null> {
     try {
         const res = await fetch(`https://img.shields.io/pypi/dm/${packageName}.json`);
-        if (!res.ok) return 'error';
+        if (!res.ok) return null;
         const data = await res.json();
-        const value = data?.value;
-        if (!value || value.toLowerCase().includes('rate limited') || value.toLowerCase().includes('error')) {
-            return 'error';
-        }
+        const value: unknown = data?.value;
+        if (typeof value !== 'string') return null;
+        const normalized = value.toLowerCase();
+        if (normalized.includes('rate limited') || normalized.includes('error')) return null;
         return value;
     } catch {
-        return 'error';
+        return null;
     }
 }
 
+type ProjectCardProps = {
+    project: Project;
+    highlight: string | null;
+    preview: string | null;
+    onPreviewError: () => void;
+};
+
+function ProjectCard({ project, highlight, preview, onPreviewError }: ProjectCardProps) {
+    const repo = githubRepo(project.link);
+
+    return (
+        <article className={styles.card}>
+            <div className={styles.media}>
+                {preview ? (
+                    <img
+                        src={preview}
+                        alt={`${project.title} preview`}
+                        className={styles.previewImg}
+                        loading="lazy"
+                        onError={onPreviewError}
+                    />
+                ) : (
+                    <div className={styles.previewFallback} aria-hidden="true">
+                        <FolderIcon size={40}/>
+                    </div>
+                )}
+            </div>
+            <div className={styles.cardBody}>
+                <div className={styles.cardTop}>
+                    <div className={styles.folderIcon}>
+                        <FolderIcon/>
+                    </div>
+                    {project.link && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.externalLink}
+                            aria-label={`View ${project.title}${repo ? ' on GitHub' : ''}`}
+                        >
+                            <ExternalLinkIcon/>
+                        </a>
+                    )}
+                </div>
+                <h3 className={styles.projectTitle}>{project.title}</h3>
+                {highlight && (
+                    <span className={styles.highlight}>
+                        <strong>{highlight}</strong>
+                    </span>
+                )}
+                <p className={styles.projectDesc}>{project.description}</p>
+                <div className={styles.tags}>
+                    {project.tags.map((tag) => (
+                        <span key={tag} className={styles.tag}>{tag}</span>
+                    ))}
+                </div>
+            </div>
+        </article>
+    );
+}
+
 export default function Projects() {
-    const [pypiStats, setPypiStats] = useState<Record<string, string>>({});
-    const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+    const [pypiStats, setPypiStats] = useState<ReadonlyMap<string, string | null>>(new Map());
+    const [failedPreviews, setFailedPreviews] = useState<ReadonlySet<string>>(new Set());
 
     useEffect(() => {
         let cancelled = false;
 
         async function loadStats() {
-            const pypiProjects = projects.filter((p) => p.pypiPackage);
-            const results = await Promise.all(
-                pypiProjects.map((p) => fetchPyPIDownloads(p.pypiPackage!)),
-            );
+            const results = await Promise.all(pypiPackages.map((pkg) => fetchPyPIDownloads(pkg)));
             if (cancelled) return;
-            const stats: Record<string, string> = {};
-            pypiProjects.forEach((p, i) => {
-                stats[p.pypiPackage!] = results[i];
-            });
-            setPypiStats(stats);
+            setPypiStats(new Map(pypiPackages.map((pkg, i) => [pkg, results[i]])));
         }
 
         loadStats();
@@ -172,112 +244,41 @@ export default function Projects() {
         };
     }, []);
 
-    function getHighlight(project: Project): string | null {
-        if (project.pypiPackage && pypiStats[project.pypiPackage]) {
-            if (pypiStats[project.pypiPackage] === 'error') {
-                return 'Available on PyPI';
-            }
-            return `${pypiStats[project.pypiPackage]} on PyPI`;
+    /** Live PyPI downloads win over the static highlight once they resolve. */
+    function highlightFor(project: Project): string | null {
+        const pkg = project.pypiPackage;
+        if (pkg && pypiStats.has(pkg)) {
+            const downloads = pypiStats.get(pkg);
+            return downloads ? `${downloads} on PyPI` : 'Available on PyPI';
         }
         return project.highlight;
     }
 
-    return (
-        <section id="projects" className={styles.section}>
-            <div className={styles.container}>
-                <h2 className={styles.heading}>
-                    <span className={styles.headingAccent}>04.</span> Projects
-                </h2>
+    function previewFor(project: Project): string | null {
+        if (failedPreviews.has(project.title)) return null;
+        return project.image ?? githubPreview(project.link);
+    }
 
-                {categories.map(({ key, label }) => {
-                    const items = projects.filter((p) => p.category === key);
-                    if (items.length === 0) return null;
-                    return (
-                        <div key={key} className={styles.categoryBlock}>
-                            <h3 className={styles.categoryTitle}>{label}</h3>
-                            <div className={styles.grid}>
-                                {items.map((project, i) => {
-                                    const highlight = getHighlight(project);
-                                    const preview = project.image ?? githubPreview(project.link);
-                                    const showImage = preview && !failedImages[project.title];
-                                    return (
-                                        <article key={i} className={styles.card}>
-                                            <div className={styles.media}>
-                                                {showImage ? (
-                                                    <img
-                                                        src={preview}
-                                                        alt={`${project.title} preview`}
-                                                        className={styles.previewImg}
-                                                        loading="lazy"
-                                                        onError={() =>
-                                                            setFailedImages((prev) => ({
-                                                                ...prev,
-                                                                [project.title]: true,
-                                                            }))
-                                                        }
-                                                    />
-                                                ) : (
-                                                    <div className={styles.previewFallback} aria-hidden="true">
-                                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
-                                                             stroke="currentColor" strokeWidth="1.5"
-                                                             strokeLinecap="round" strokeLinejoin="round">
-                                                            <path
-                                                                d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
-                                                        </svg>
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <div className={styles.cardBody}>
-                                                <div className={styles.cardTop}>
-                                                    <div className={styles.folderIcon}>
-                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                             stroke="currentColor" strokeWidth="1.5"
-                                                             strokeLinecap="round"
-                                                             strokeLinejoin="round">
-                                                            <path
-                                                                d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/>
-                                                        </svg>
-                                                    </div>
-                                                    {project.link && (
-                                                        <a
-                                                            href={project.link}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className={styles.externalLink}
-                                                            aria-label={`View ${project.title}${project.link.includes('github.com') ? ' on GitHub' : ''}`}
-                                                        >
-                                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                                                 stroke="currentColor" strokeWidth="1.5"
-                                                                 strokeLinecap="round" strokeLinejoin="round">
-                                                                <path
-                                                                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                                                <polyline points="15 3 21 3 21 9"/>
-                                                                <line x1="10" y1="14" x2="21" y2="3"/>
-                                                            </svg>
-                                                        </a>
-                                                    )}
-                                                </div>
-                                                <h3 className={styles.projectTitle}>{project.title}</h3>
-                                                {highlight && (
-                                                    <span className={styles.highlight}>
-                                                        <strong>{highlight}</strong>
-                                                    </span>
-                                                )}
-                                                <p className={styles.projectDesc}>{project.description}</p>
-                                                <div className={styles.tags}>
-                                                    {project.tags.map((tag) => (
-                                                        <span key={tag} className={styles.tag}>{tag}</span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </article>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
-        </section>
+    return (
+        <Section id="projects" title="Projects">
+            {groupedProjects.map(({ category, label, items }) => (
+                <div key={category} className={styles.categoryBlock}>
+                    <h3 className={styles.categoryTitle}>{label}</h3>
+                    <div className={styles.grid}>
+                        {items.map((project) => (
+                            <ProjectCard
+                                key={project.title}
+                                project={project}
+                                highlight={highlightFor(project)}
+                                preview={previewFor(project)}
+                                onPreviewError={() =>
+                                    setFailedPreviews((prev) => new Set(prev).add(project.title))
+                                }
+                            />
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </Section>
     );
 }

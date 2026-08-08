@@ -1,0 +1,6 @@
+/* Vertical stack wrapping a list of TimelineCards. */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}

@@ -1,0 +1,27 @@
+/*
+ * Shared building blocks composed into component modules via `composes`.
+ * Import with e.g. `composes: card lift from '../styles/primitives.module.css';`
+ */
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.3s, transform 0.2s;
+}
+
+.card:hover {
+    border-color: var(--border-hover);
+}
+
+/* Opt-in hover lift. Not every card uses it. */
+.lift:hover {
+    transform: translateY(-2px);
+}
+
+.period {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}

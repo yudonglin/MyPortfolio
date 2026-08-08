@@ -99,12 +99,30 @@
     align-items: center;
     gap: 24px;
     flex-wrap: wrap;
+    list-style: none;
 }
 
-.stat {
+.statItem {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 4px;
+}
+
+/* Divider sits between stats, so it can never orphan onto a wrapped line. */
+.statItem + .statItem {
+    padding-left: 24px;
+}
+
+.statItem + .statItem::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 36px;
+    background: var(--border);
 }
 
 .statNumber {
@@ -123,15 +141,19 @@
     letter-spacing: 1px;
 }
 
-.statDivider {
-    width: 1px;
-    height: 36px;
-    background: var(--border);
-}
-
 @media (max-width: 768px) {
     .hero {
         padding: 100px 20px 60px;
+    }
+
+    /* The row wraps at this width, which would strand a divider at the edge
+       of a line. Spacing alone separates the stats here. */
+    .statItem + .statItem {
+        padding-left: 0;
+    }
+
+    .statItem + .statItem::before {
+        content: none;
     }
 
     .stats {

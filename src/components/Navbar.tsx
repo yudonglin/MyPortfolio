@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { type SectionId, SECTIONS } from '../sections';
+import { MAILTO } from '../site';
 import styles from './Navbar.module.css';
 
-const navLinks = ['About', 'Objective', 'Education', 'Experience', 'Projects', 'Publications', 'Volunteering', 'Skills'];
+const MENU_ID = 'primary-navigation';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -9,13 +11,13 @@ export default function Navbar() {
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
-        window.addEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll, { passive: true });
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
-    const handleClick = (id: string) => {
+    const scrollToSection = (id: SectionId) => {
         setMobileOpen(false);
-        document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     };
 
     return (
@@ -27,25 +29,27 @@ export default function Navbar() {
 
                 <button
                     className={`${styles.burger} ${mobileOpen ? styles.burgerOpen : ''}`}
-                    onClick={() => setMobileOpen(!mobileOpen)}
+                    onClick={() => setMobileOpen((open) => !open)}
                     aria-label="Toggle menu"
+                    aria-expanded={mobileOpen}
+                    aria-controls={MENU_ID}
                 >
                     <span/><span/><span/>
                 </button>
 
-                <ul className={`${styles.links} ${mobileOpen ? styles.linksOpen : ''}`}>
-                    {navLinks.map((link) => (
-                        <li key={link}>
-                            <button className={styles.link} onClick={() => handleClick(link)}>
-                                {link}
+                <ul
+                    id={MENU_ID}
+                    className={`${styles.links} ${mobileOpen ? styles.linksOpen : ''}`}
+                >
+                    {SECTIONS.map(({ id, label }) => (
+                        <li key={id}>
+                            <button className={styles.link} onClick={() => scrollToSection(id)}>
+                                {label}
                             </button>
                         </li>
                     ))}
                     <li>
-                        <a
-                            href="mailto:wynterlyd@gmail.com"
-                            className={styles.contactBtn}
-                        >
+                        <a href={MAILTO} className={styles.contactBtn}>
                             Contact
                         </a>
                     </li>

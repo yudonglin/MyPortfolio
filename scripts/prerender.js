@@ -1,5 +1,6 @@
 /*
- * Bakes the rendered app into dist/index.html after `vite build`.
+ * Bakes the rendered app into dist/index.html after `vite build`, and writes the
+ * robots.txt and sitemap.xml that point at it.
  *
  * Runs against the SSR bundle in dist-ssr rather than the source, so CSS module
  * class names and asset URLs come from the same Vite pipeline as the client
@@ -10,29 +11,23 @@ import { fileURLToPath } from 'node:url';
 import { render } from '../dist-ssr/entry-server.js';
 
 const ROOT_MARKER = '<div id="root"></div>';
-const URL_TOKEN = '__SITE_URL__';
 
 const path = (relative) => fileURLToPath(new URL(relative, import.meta.url));
 
 const indexPath = path('../dist/index.html');
 const template = await readFile(indexPath, 'utf8');
 
-// Silent no-ops here would ship an empty page, or a canonical URL still reading
-// `__SITE_URL__`, to every crawler -- exactly what this script exists to prevent.
-for (const marker of [ROOT_MARKER, URL_TOKEN]) {
-    if (!template.includes(marker)) {
-        throw new Error(`prerender: ${marker} not found in dist/index.html`);
-    }
+// A silent no-op here would ship an empty page to every crawler -- exactly what
+// this script exists to prevent.
+if (!template.includes(ROOT_MARKER)) {
+    throw new Error(`prerender: ${ROOT_MARKER} not found in dist/index.html`);
 }
 
 const { html: appHtml, siteUrl } = render();
 
-// Replacing via callback throughout: both the markup and the URL can contain
-// `$&`-style sequences that the string form of replace reads as capture-group
-// references.
-const html = template
-    .replace(ROOT_MARKER, () => `<div id="root">${appHtml}</div>`)
-    .replaceAll(URL_TOKEN, () => siteUrl);
+// split/join rather than replace: the rendered markup can contain `$&`-style
+// sequences that replace would read as capture-group references.
+const html = template.split(ROOT_MARKER).join(`<div id="root">${appHtml}</div>`);
 
 await writeFile(indexPath, html);
 

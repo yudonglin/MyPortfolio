@@ -9,6 +9,7 @@ import Publications from './components/Publications';
 import Volunteering from './components/Volunteering';
 import Skills from './components/Skills';
 import Footer from './components/Footer';
+import BackToTop from './components/BackToTop';
 import styles from './App.module.css';
 
 // Section order here must match SECTIONS in src/sections.ts, which drives the
@@ -30,6 +31,7 @@ export default function App() {
                     <Skills/>
                 </main>
                 <Footer/>
+                <BackToTop/>
             </div>
         </>
     );

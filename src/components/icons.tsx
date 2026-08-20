@@ -94,6 +94,15 @@ export function NeuronIcon({ size = 22 }: IconProps) {
     );
 }
 
+export function ArrowUpIcon({ size = 20 }: IconProps) {
+    return (
+        <OutlineIcon size={size} strokeWidth={2}>
+            <line x1="12" y1="20" x2="12" y2="5"/>
+            <polyline points="5 12 12 5 19 12"/>
+        </OutlineIcon>
+    );
+}
+
 export function MailIcon({ size = 20 }: IconProps) {
     return (
         <OutlineIcon size={size}>

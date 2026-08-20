@@ -1,0 +1,63 @@
+/*
+ * Sits below the navbar's z-index on purpose: the full-screen mobile menu is a
+ * child of the nav, so it covers this button rather than letting it float over
+ * the open menu.
+ */
+.button {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(20, 22, 32, 0.85);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    /* Same idiom as the mobile menu: visibility flips only after the fade, so
+       the hidden button leaves the tab order without cutting the animation. */
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s,
+        border-color 0.2s, visibility 0s linear 0.3s;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s,
+        border-color 0.2s, visibility 0s;
+}
+
+.visible:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: scale(0.94);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    .button {
+        right: 16px;
+        bottom: 16px;
+        /* 44px keeps the tap target at the platform minimum. */
+        width: 44px;
+        height: 44px;
+    }
+}

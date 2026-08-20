@@ -17,6 +17,33 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    // While the full-screen menu is up, Escape must dismiss it, and it must not
+    // stay open past the breakpoint that hides the burger — a rotation to
+    // landscape would otherwise leave an overlay with no way to close it.
+    //
+    // The page behind the menu is held still by `overscroll-behavior` on the
+    // overlay, not by locking `body`. A lock would still be applied when a nav
+    // tap calls `scrollIntoView` below, and an unscrollable viewport silently
+    // swallows that scroll, so every menu item would do nothing.
+    useEffect(() => {
+        if (!mobileOpen) return;
+
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setMobileOpen(false);
+        };
+        const desktop = window.matchMedia('(min-width: 769px)');
+        const onBreakpoint = () => {
+            if (desktop.matches) setMobileOpen(false);
+        };
+
+        window.addEventListener('keydown', onKeyDown);
+        desktop.addEventListener('change', onBreakpoint);
+        return () => {
+            window.removeEventListener('keydown', onKeyDown);
+            desktop.removeEventListener('change', onBreakpoint);
+        };
+    }, [mobileOpen]);
+
     const scrollToSection = (id: SectionId) => {
         setMobileOpen(false);
         // No explicit `behavior`, so this inherits `scroll-behavior` from the
@@ -28,7 +55,7 @@ export default function Navbar() {
     return (
         <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
             <div className={styles.inner}>
-                <a href="#" className={styles.logo}>
+                <a href="#" className={styles.logo} onClick={() => setMobileOpen(false)}>
                     <span className={styles.logoAccent}>W</span>ynter
                 </a>
 
